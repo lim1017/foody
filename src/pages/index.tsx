@@ -1,4 +1,5 @@
 // pages/index.tsx
+import BottomNav from "@/components/BottomNav";
 import Map from "@/components/Map";
 import Head from "next/head";
 import React from "react";
@@ -25,36 +26,22 @@ const Home = () => {
         </div>
         <nav className="flex justify-around">
           <a href="#" className="text-blue-500 hover:text-blue-700">
-            Home
+            Friends
           </a>
           <a href="#" className="text-blue-500 hover:text-blue-700">
-            Favorites
+            Favourites
           </a>
           <a href="#" className="text-blue-500 hover:text-blue-700">
-            Profile
+            Type
           </a>
         </nav>
       </header>
 
-      <main className="flex-1 overflow-y-auto p-4">
+      <main className="flex-1 overflow-y-auto">
         <div className="container mx-auto bg-gray-100 rounded-lg h-full">
           <Map />
         </div>
       </main>
-
-      <footer className="bg-white shadow p-4">
-        <nav className="flex justify-around">
-          <a href="#" className="text-blue-500 hover:text-blue-700">
-            Home
-          </a>
-          <a href="#" className="text-blue-500 hover:text-blue-700">
-            Favorites
-          </a>
-          <a href="#" className="text-blue-500 hover:text-blue-700">
-            Profile
-          </a>
-        </nav>
-      </footer>
     </div>
   );
 };
