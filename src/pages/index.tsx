@@ -1,4 +1,5 @@
 // pages/index.tsx
+import Map from "@/components/Map";
 import Head from "next/head";
 import React from "react";
 
@@ -37,8 +38,7 @@ const Home = () => {
 
       <main className="flex-1 overflow-y-auto p-4">
         <div className="container mx-auto bg-gray-100 rounded-lg h-full">
-          {/* Map or content will go here */}
-          <div className="text-red-500">Map will go here</div>
+          <Map />
         </div>
       </main>
 
