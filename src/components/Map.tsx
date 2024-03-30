@@ -1,5 +1,5 @@
 // components/Map.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 
 // Define types for the component props if needed
@@ -18,12 +18,39 @@ const center = {
 };
 
 const Map: React.FC<MapProps> = () => {
-  console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [mapOptions, setMapOptions] = useState<google.maps.MapOptions>({
+    streetViewControl: !isMobile,
+    mapTypeControl: !isMobile,
+    zoomControl: !isMobile,
+    fullscreenControl: !isMobile,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setMapOptions({
+        streetViewControl: !mobile,
+        mapTypeControl: !mobile,
+        zoomControl: !mobile,
+        fullscreenControl: !isMobile,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
     >
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        options={mapOptions}
+        center={center}
+        zoom={10}
+      >
         {/* Child components like markers can go here */}
       </GoogleMap>
     </LoadScript>

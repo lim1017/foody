@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaMap, FaListUl } from "react-icons/fa";
@@ -30,7 +31,7 @@ const NavItem = ({ Icon, label, href }: NavItemProps) => {
 
 const BottomNav = () => {
   return (
-    <nav className="flex justify-around py-5">
+    <nav className="flex justify-around py-3">
       <NavItem Icon={FaListUl} label="My List" href="/list" />
       <NavItem Icon={FaMap} label="Explore" href="/" />
       <NavItem Icon={CgProfile} label="Profile" href="/profile" />
