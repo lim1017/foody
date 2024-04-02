@@ -1,9 +1,23 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-const Modal = () => {
-  let [isOpen, setIsOpen] = useState(true);
+export const useModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen(!isOpen);
+  return {
+    isOpen,
+    toggleModal,
+    setIsOpen,
+  };
+};
 
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
+}
+
+const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
   return (
     <Dialog
       open={isOpen}
@@ -19,14 +33,7 @@ const Modal = () => {
         <div className="flex min-h-full items-center justify-center p-4">
           {/* The actual dialog panel  */}
           <Dialog.Panel className="mx-auto max-w-sm rounded bg-white absolute top-20 inset-x-0 h-4/5 overflow-y-auto">
-            <Dialog.Title>Complete your order</Dialog.Title>
-
-            <Dialog.Description>
-              Choose your payment method and complete your order Choose your
-              payment method and complete your order Choose your payment method
-              and complete your order Choose your payment method and complete
-              your order Choose your payment method and complete your order
-            </Dialog.Description>
+            <Dialog.Description>{children}</Dialog.Description>
           </Dialog.Panel>
         </div>
       </div>

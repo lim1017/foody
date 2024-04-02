@@ -5,7 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import useCurrentLocation from "@/hooks/useCurrentLocation";
+import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
 
 interface MapProps {}
 

@@ -54,7 +54,10 @@ const filterVideosByLocations = async (
 };
 
 export const GET = async (req, res) => {
-  const channelId = req.query.channelId; // Get channelId from the query string
+  const searchParams = req.nextUrl.searchParams;
+  const channelId = searchParams.get("channelId");
+
+  console.log(channelId, "channelId");
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
 
   try {
@@ -65,7 +68,6 @@ export const GET = async (req, res) => {
       "Mississauga, ON",
     ]);
 
-    console.log(videosInToronto, "videos in toronto");
     console.log(videosInToronto.length, "videos in toronto");
 
     return NextResponse.json(videosInToronto, { status: 200 });

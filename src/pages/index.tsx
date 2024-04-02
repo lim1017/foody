@@ -1,10 +1,9 @@
 // pages/index.tsx
-import Button from "@/components/Button";
 import Map from "@/components/Map";
 import Modal from "@/components/Modal";
-import TopNav from "@/components/TopNav";
+import TopNav, { NavItemEnum } from "@/components/TopNav";
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 
 const Home = () => {
   return (
@@ -34,7 +33,7 @@ const Home = () => {
           <Map />
         </div>
       </main>
-      <Modal />
+      {/* <Modal /> */}
     </div>
   );
 };
