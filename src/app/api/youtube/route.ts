@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { google, youtube_v3 } from "googleapis";
+import { extractName } from "../services/openai";
 
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
@@ -53,6 +54,17 @@ const filterVideosByLocations = async (
   });
 };
 
+const formatYoutubeData = (data: any) => {
+  return data.map((item: any) => {
+    return {
+      title: item.snippet.title,
+      description: item.snippet.description.substring(0, 300),
+      thumbnail: item.snippet.thumbnails.high.url,
+      videoId: item.snippet.resourceId.videoId,
+    };
+  });
+};
+
 export const GET = async (req, res) => {
   const searchParams = req.nextUrl.searchParams;
   const channelId = searchParams.get("channelId");
@@ -67,10 +79,13 @@ export const GET = async (req, res) => {
       "Toronto, ON",
       "Mississauga, ON",
     ]);
+    console.log(videosInToronto.length, "videosInToronto length");
+    const formattedData = formatYoutubeData(videosInToronto);
+    const dataWithName = await extractName(formattedData);
+    console.log(dataWithName, "dataWithName");
+    console.log(dataWithName.length, "dataWithName lenght");
 
-    console.log(videosInToronto.length, "videos in toronto");
-
-    return NextResponse.json(videosInToronto, { status: 200 });
+    return NextResponse.json(dataWithName, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
