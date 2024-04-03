@@ -1,11 +1,12 @@
-// pages/index.tsx
-import Map from "@/components/Map";
-import Modal from "@/components/Modal";
-import TopNav, { NavItemEnum } from "@/components/TopNav";
-import Head from "next/head";
 import React, { useState } from "react";
+import Map from "@/components/Map";
+import TopNav from "@/components/TopNav";
+import Head from "next/head";
 
 const Home = () => {
+  const [mapMarkers, setMapMarkers] = useState<any[]>([]);
+
+  console.log(mapMarkers, "mapMarkers");
   return (
     <div className="flex flex-col h-screen">
       <Head>
@@ -25,15 +26,14 @@ const Home = () => {
             className="w-full p-2 border border-gray-200 rounded"
           />
         </div>
-        <TopNav />
+        <TopNav setMapMarkers={setMapMarkers} />
       </header>
 
       <main className="flex-1 overflow-y-auto">
         <div className="container mx-auto bg-gray-100 rounded-lg h-full">
-          <Map />
+          <Map mapMarkers={mapMarkers} />
         </div>
       </main>
-      {/* <Modal /> */}
     </div>
   );
 };

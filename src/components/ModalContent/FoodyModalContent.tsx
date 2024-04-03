@@ -20,13 +20,13 @@ const foodiesItems = [
   { label: "Sushi", icon: BiSushi, channelId: "fakeID" },
 ];
 
-const FoodyModalContent = () => {
+const FoodyModalContent = ({ setMapMarkers }: any) => {
   const [activeFoodie, setActiveFoodie] = useState("");
 
   const handleSelectFoody = async (item: FoodiesItem) => {
     setActiveFoodie(item.label);
     const data = await fetchYoutubeData(item.channelId);
-    console.log(data);
+    setMapMarkers(data);
   };
 
   return (

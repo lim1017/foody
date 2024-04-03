@@ -1,7 +1,7 @@
 interface FetcherProps {
   url: string;
   method: string;
-  body: any;
+  body?: any;
 }
 
 export const fetcher = async ({ url, method, body }: FetcherProps) => {
@@ -30,6 +30,5 @@ export const fetchYoutubeData = async (channelId: string) => {
     url: `/api/youtube?channelId=${channelId}`,
     method: "GET",
   });
-  console.log(data);
   return data;
 };

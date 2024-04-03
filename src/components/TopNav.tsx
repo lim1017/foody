@@ -44,25 +44,12 @@ interface topNavItem {
   content: React.ReactNode;
 }
 
-const topNavItems: topNavItem[] = [
-  {
-    label: NavItemEnum.Foodies,
-    icon: SiFoodpanda,
-    content: <FoodyModalContent />,
-  },
-  {
-    label: NavItemEnum.Friends,
-    icon: GiThreeFriends,
-    content: <div>content friends</div>,
-  },
-  { label: NavItemEnum.Hot, icon: FaHotjar, content: <div>HOT CONTENT</div> },
-];
 // interface TopNavProps {
 //   activeTopNavItem: NavItemEnum;
 //   setActiveTopNavItem: React.Dispatch<React.SetStateAction<NavItemEnum>>;
 // }
 
-const TopNav = () => {
+const TopNav = ({ setMapMarkers }: any) => {
   const [activeTopNavItem, setActiveTopNavItem] = useState<NavItemEnum>(
     NavItemEnum.Hot
   );
@@ -70,6 +57,20 @@ const TopNav = () => {
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
 
   const { isOpen, toggleModal, setIsOpen } = useModal();
+
+  const topNavItems: topNavItem[] = [
+    {
+      label: NavItemEnum.Foodies,
+      icon: SiFoodpanda,
+      content: <FoodyModalContent setMapMarkers={setMapMarkers} />,
+    },
+    {
+      label: NavItemEnum.Friends,
+      icon: GiThreeFriends,
+      content: <div>content friends</div>,
+    },
+    { label: NavItemEnum.Hot, icon: FaHotjar, content: <div>HOT CONTENT</div> },
+  ];
 
   const handleItemClick = (item: topNavItem) => {
     setActiveTopNavItem(item.label);

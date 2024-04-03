@@ -7,7 +7,9 @@ import {
 } from "@react-google-maps/api";
 import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
 
-interface MapProps {}
+interface MapProps {
+  mapMarkers: any[];
+}
 
 const containerStyle = {
   width: "100%", // or a specific width like '400px'
@@ -25,7 +27,7 @@ const markers = [
   { id: 3, name: "store2", lat: 43.71435, lng: -79.35466 },
 ];
 
-const Map: React.FC<MapProps> = () => {
+const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
   const [isMobile, setIsMobile] = useState(true);
 
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
