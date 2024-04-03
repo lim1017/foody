@@ -26,8 +26,8 @@ const FoodyModalContent = ({ setMapMarkers }: any) => {
   const handleSelectFoody = async (item: FoodiesItem) => {
     setActiveFoodie(item.label);
     const data = await fetchYoutubeData(item.channelId);
-    console.log(data);
-    // setMapMarkers(data);
+    setMapMarkers(data);
+    console.log(data, "retrieved data");
   };
 
   return (

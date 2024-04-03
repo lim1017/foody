@@ -4,6 +4,7 @@ export const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
 
+//chunk array to stay within token limit
 const chunkArray = (array, size) => {
   const chunkedArr = [];
   for (let i = 0; i < array.length; i += size) {

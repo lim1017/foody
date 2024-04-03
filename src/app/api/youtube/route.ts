@@ -79,12 +79,10 @@ export const GET = async (req, res) => {
       "Toronto, ON",
       "Mississauga, ON",
     ]);
-    console.log(videosInToronto.length, "videosInToronto length");
     const formattedData = formatYoutubeData(videosInToronto);
     const dataWithName = await extractName(formattedData);
-    console.log(dataWithName, "dataWithName");
-    console.log(dataWithName.length, "dataWithName lenght");
 
+    console.log(dataWithName, "dataWithName");
     return NextResponse.json(dataWithName, { status: 200 });
   } catch (error) {
     console.error(error);
