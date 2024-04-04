@@ -28,10 +28,10 @@ export const extractName = async (data: any) => {
 
           Example Input:
         [{
-          title: 'Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)',
-          description: 'Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.',
-          thumbnail: 'https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg',
-          videoId: 'Gvj6eTHxstE',
+          "title": 'Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)',
+          "description": 'Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.',
+          "thumbnail": 'https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg',
+          "videoId": 'Gvj6eTHxstE',
           "transcript": 'Amazing pizza place, i would give it a score of 8.3'
 
         Example Output:
@@ -40,8 +40,9 @@ export const extractName = async (data: any) => {
           "description": "Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.",
           "thumbnail": "https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg",
           "videoId": "Gvj6eTHxstE",
+          "transcript": 'Amazing pizza place, i would give it a score of 8.3',
           "location": "Toronto, ON",
-          "restaurentName": "North Of Brooklyn Pizzeria",
+          "restaurantName": "North Of Brooklyn Pizzeria",
           "score": "8.3"
         }]
 
@@ -51,8 +52,8 @@ export const extractName = async (data: any) => {
       ],
       model: "gpt-3.5-turbo",
     });
-
     const chunkResult = completion.choices[0].message.content;
+    console.log(chunkResult, "extracted!!!!!!!!!!1");
     results.push(...JSON.parse(chunkResult));
   }
   return results;

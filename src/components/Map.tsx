@@ -77,20 +77,27 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
         center={currentLocation}
         zoom={12}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            onClick={(e) => handleActiveMarker(marker.id)}
-            clickable={true}
-            position={{ lat: marker.lat, lng: marker.lng }}
-          >
-            {activeMarker === marker.id && (
-              <InfoWindow position={{ lat: marker.lat, lng: -79.26897 }}>
-                <div>{marker.name}</div>
-              </InfoWindow>
-            )}
-          </Marker>
-        ))}
+        {mapMarkers.map((marker) => {
+          const lat = marker.geometry.location.lat;
+          const lng = marker.geometry.location.lng;
+          return (
+            <Marker
+              key={marker.id}
+              onClick={(e) => handleActiveMarker(marker.videoId)}
+              clickable={true}
+              position={{ lat, lng }}
+            >
+              {activeMarker === marker.videoId && (
+                <InfoWindow position={{ lat, lng }}>
+                  <div>
+                    <div>{marker.restaurantName}asdkjhaskjdh</div>
+                    <div>{marker.address}</div>
+                  </div>
+                </InfoWindow>
+              )}
+            </Marker>
+          );
+        })}
       </GoogleMap>
     </LoadScript>
   );

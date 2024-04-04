@@ -43,7 +43,7 @@ export const extractName = async (data: any) => {
           "thumbnail": 'https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg',
           "videoId": 'Gvj6eTHxstE',
           "location": 'Toronto, ON',
-          "restaurentName": 'North Of Brooklyn Pizzeria'
+          "restaurantName": 'North Of Brooklyn Pizzeria'
         }]
 
 

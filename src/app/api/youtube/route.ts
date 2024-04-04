@@ -4,8 +4,8 @@ import { extractName } from "../services/openai";
 import fs from "fs/promises";
 import { YoutubeTranscript } from "youtube-transcript";
 
-import { Client } from "@googlemaps/google-maps-services-js";
-
+import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js";
+import BarStoolPizza from "../data/BarStoolPizza.json";
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
 // Use map to extract the 'text' property from each transcript object to a single string
@@ -101,7 +101,7 @@ const formatYoutubeData = (data: any) => {
   });
 };
 
-//fetches playlist items, filters by locations, uses OpenAI to extrat name and location and writes data to a JSON file
+//fetches playlist items, filters by locations, uses OpenAI to extrat name and location and writes data to a JSON file.  TODO: because LLM output is inconsistant and sometime returns invalid json or incorrect data, need to create steps we can continue from instead of starting over each time
 export const GET = async (req, res) => {
   // const searchParams = req.nextUrl.searchParams;
   // const channelId = searchParams.get("channelId");
@@ -122,14 +122,15 @@ export const GET = async (req, res) => {
       formattedRestaurantData
     );
 
-    console.log("getting address with google places");
     const promises = restaurantWithNameLocation.map(async (restaurant) => {
       const details = await fetchRestaurantAddress(restaurant);
+      console.log(details, "details with address");
       return {
         ...restaurant,
-        address: details?.[0].formatted_address,
-        geometry: details?.[0].geometry,
-        types: details?.[0].types,
+        address: details.formatted_address,
+        placeId: details.place_id,
+        geometry: details.geometry,
+        types: details.types,
       };
     });
 
@@ -150,23 +151,25 @@ export const GET = async (req, res) => {
 };
 
 async function fetchRestaurantAddress(restaurant: {
-  restaurentName: string;
+  restaurantName: string;
   location: string;
 }) {
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
   const client = new Client({});
-
-  const { restaurentName, location } = restaurant;
-
+  const { restaurantName, location } = restaurant;
   try {
-    const response = await client.geocode({
+    const placeIdResponse = await client.findPlaceFromText({
       params: {
-        address: `${restaurentName} ${location}`,
+        input: `${restaurantName}, ${location}`,
+        inputtype: PlaceInputType.textQuery,
         key: apiKey || "",
+        fields: ["formatted_address", "name", "geometry", "place_id", "types"],
       },
     });
 
-    return response.data.results;
+    const placeInfo = placeIdResponse.data.candidates[0];
+
+    return placeInfo;
   } catch (error) {
     console.error("Error fetching place details:", error);
     return null;

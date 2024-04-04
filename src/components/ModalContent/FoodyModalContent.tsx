@@ -25,9 +25,8 @@ const FoodyModalContent = ({ setMapMarkers }: any) => {
 
   const handleSelectFoody = async (item: FoodiesItem) => {
     setActiveFoodie(item.label);
-    const data = await fetchFoodyData(item.handle);
-    setMapMarkers(data);
-    console.log(data, "retrieved data");
+    const res = await fetchFoodyData(item.handle);
+    setMapMarkers(res.data);
   };
 
   return (
