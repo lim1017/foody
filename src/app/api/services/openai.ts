@@ -14,7 +14,7 @@ const chunkArray = (array, size) => {
 };
 
 export const extractName = async (data: any) => {
-  const chunks = chunkArray(data, 5);
+  const chunks = chunkArray(data, 1);
   const results = [];
 
   for (const chunk of chunks) {
@@ -24,24 +24,25 @@ export const extractName = async (data: any) => {
       messages: [
         {
           role: "user",
-          content: `I am providing you with a json array of objects containing restaurant video reviews with title, description, thumbnail, and videoId. You are to iterate through the array and add the name and location of the restaurant to the object.
+          content: `I am providing you with a json array of objects containing restaurant video reviews with title, description, thumbnail, videoId, and transcript. You are to iterate through the array of each review and add the name and location of the restaurant to the object.  Also check the transcipt determine the score or rating for the review.  Output in valid JSON format.
 
-          Example Input (JSON):
+          Example Input:
         [{
           title: 'Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)',
           description: 'Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.',
           thumbnail: 'https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg',
-          videoId: 'Gvj6eTHxstE'
-        }]
+          videoId: 'Gvj6eTHxstE',
+          "transcript": 'Amazing pizza place, i would give it a score of 8.3'
 
-        Example Output (JSON):
+        Example Output:
         [{
-          "title": 'Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)',
-          "description": 'Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.',
-          "thumbnail": 'https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg',
-          "videoId": 'Gvj6eTHxstE',
-          "location": 'Toronto, ON',
-          "restaurentName": 'North Of Brooklyn Pizzeria'
+          "title": "Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)",
+          "description": "Dave is in Canada for The Score and the Red Sox Blue Jays game and tries one of the most recommended places in Toronto: North Of Brooklyn Pizzeria.",
+          "thumbnail": "https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg",
+          "videoId": "Gvj6eTHxstE",
+          "location": "Toronto, ON",
+          "restaurentName": "North Of Brooklyn Pizzeria",
+          "score": "8.3"
         }]
 
 

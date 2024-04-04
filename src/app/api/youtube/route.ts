@@ -2,12 +2,20 @@ import { NextResponse } from "next/server";
 import { google, youtube_v3 } from "googleapis";
 import { extractName } from "../services/openai";
 import fs from "fs/promises";
+import { YoutubeTranscript } from "youtube-transcript";
 
 import { Client } from "@googlemaps/google-maps-services-js";
 
-import barstoolData from "../data/BarStoolPizza.json";
-
 type VideoItem = youtube_v3.Schema$PlaylistItem;
+
+// Use map to extract the 'text' property from each transcript object to a single string
+function stitchTranscripts(transcripts: any[]) {
+  const transcriptTexts = transcripts.map((transcript) => transcript.text);
+
+  const combinedText = transcriptTexts.join(" ");
+
+  return combinedText;
+}
 
 const fetchPlaylistItems = async (
   playlistId: string,
@@ -29,7 +37,29 @@ const fetchPlaylistItems = async (
       pageToken: pageToken,
     });
 
-    videos.push(...response.data.items);
+    const videoList = response.data.items;
+
+    const filteredVideoList = await filterVideosByLocations(videoList, [
+      "Toronto, ON",
+      "Mississauga, ON",
+    ]);
+
+    console.log(filteredVideoList.length, "filtered videos length");
+
+    for (let i = 0; i < filteredVideoList.length; i++) {
+      const videoId = filteredVideoList[i].snippet.resourceId.videoId;
+      try {
+        const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
+        const stringTranscript = stitchTranscripts(transcriptData);
+        filteredVideoList[i].snippet.transcript = stringTranscript;
+      } catch (error) {
+        console.error(
+          `Failed to fetch transcript for video ID ${videoId}: ${error}`
+        );
+      }
+    }
+
+    videos.push(...filteredVideoList);
     pageToken = response.data.nextPageToken;
   } while (pageToken);
 
@@ -66,6 +96,7 @@ const formatYoutubeData = (data: any) => {
       description: item.snippet.description.substring(0, 300),
       thumbnail: item.snippet.thumbnails.high.url,
       videoId: item.snippet.resourceId.videoId,
+      transcript: item.snippet.transcript,
     };
   });
 };
@@ -84,11 +115,7 @@ export const GET = async (req, res) => {
     console.log("fetching data for", channelName);
     const videos = await fetchPlaylistItems(channelId, apiKey);
 
-    const videosInToronto = await filterVideosByLocations(videos, [
-      "Toronto, ON",
-      "Mississauga, ON",
-    ]);
-    const formattedRestaurantData = formatYoutubeData(videosInToronto);
+    const formattedRestaurantData = formatYoutubeData(videos);
 
     console.log("extracting data... for", channelName);
     const restaurantWithNameLocation = await extractName(
@@ -122,7 +149,10 @@ export const GET = async (req, res) => {
   }
 };
 
-async function fetchRestaurantAddress(restaurant) {
+async function fetchRestaurantAddress(restaurant: {
+  restaurentName: string;
+  location: string;
+}) {
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
   const client = new Client({});
 
