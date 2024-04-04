@@ -1,35 +1,5 @@
 [
   {
-    "title": "Barstool Pizza Review - Pizza Pizza (Toronto, ON) The Perfect Ending To The Toronto Series",
-    "description": "We end the Toronto series at the popular chain Pizza Pizza, where we run into the ball of sunshine that is Nareen. What an ending to the trip. \n\nDownload The One Bite App to see more and review your favorite pizza joints: https://onebite.app/download\r\n\r\nFollow on Instagram: https://www.instagram.com",
-    "thumbnail": "https://i.ytimg.com/vi/cQtqUcGxeQ0/hqdefault.jpg",
-    "videoId": "cQtqUcGxeQ0",
-    "location": "Toronto, ON",
-    "restaurantName": "Pizza Pizza",
-    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
-    "geometry": {
-      "location": {
-        "lat": 43.6463329,
-        "lng": -79.405351
-      },
-      "location_type": "ROOFTOP",
-      "viewport": {
-        "northeast": {
-          "lat": 43.6475886302915,
-          "lng": -79.40394166970849
-        },
-        "southwest": {
-          "lat": 43.6448906697085,
-          "lng": -79.40663963029151
-        }
-      }
-    },
-    "types": [
-      "establishment",
-      "point_of_interest"
-    ]
-  },
-  {
     "title": "Barstool Pizza Review - Fresca Pizza & Pasta (Toronto, ON)",
     "description": "After a recommendation from Bill The Greek, Dave stops by Fresca's to try the now cook owned pizza spot. \n\nDownload The One Bite App to see more and review your favorite pizza joints: https://onebite.app/download\r\n\r\nFollow on Instagram: https://www.instagram.com/stoolpresidente/\r\nFollow on Twitter: ",
     "thumbnail": "https://i.ytimg.com/vi/T7mSx9ij_5Y/hqdefault.jpg",
@@ -54,10 +24,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "point_of_interest"
-    ]
+    "types": ["establishment", "point_of_interest"]
   },
   {
     "title": "Barstool Pizza Review - Carlo’s Bakery (Mississauga, ON)",
@@ -94,10 +61,7 @@
         }
       }
     },
-    "types": [
-      "locality",
-      "political"
-    ]
+    "types": ["locality", "political"]
   },
   {
     "title": "Barstool Pizza Review - Pizza Nostra (Mississauga, ON)",
@@ -134,10 +98,7 @@
         }
       }
     },
-    "types": [
-      "locality",
-      "political"
-    ]
+    "types": ["locality", "political"]
   },
   {
     "title": "Barstool Pizza Review - Conzo's Pizza (Toronto, ON)",
@@ -164,10 +125,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "point_of_interest"
-    ]
+    "types": ["establishment", "point_of_interest"]
   },
   {
     "title": "Barstool Pizza Review - Superpoint (Toronto, ON)",
@@ -194,13 +152,7 @@
         }
       }
     },
-    "types": [
-      "bar",
-      "establishment",
-      "food",
-      "point_of_interest",
-      "restaurant"
-    ]
+    "types": ["bar", "establishment", "food", "point_of_interest", "restaurant"]
   },
   {
     "title": "Barstool Pizza Review - Ambassador Pizza Co (Toronto, ON)",
@@ -295,12 +247,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "food",
-      "point_of_interest",
-      "restaurant"
-    ]
+    "types": ["establishment", "food", "point_of_interest", "restaurant"]
   },
   {
     "title": "Barstool Pizza Review - One Night Only Pizza (Toronto, ON)",
@@ -427,12 +374,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "food",
-      "point_of_interest",
-      "restaurant"
-    ]
+    "types": ["establishment", "food", "point_of_interest", "restaurant"]
   },
   {
     "title": "Barstool Pizza Review - Bitondo's Pizzeria (Toronto, ON)",
@@ -459,12 +401,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "food",
-      "point_of_interest",
-      "restaurant"
-    ]
+    "types": ["establishment", "food", "point_of_interest", "restaurant"]
   },
   {
     "title": "Barstool Pizza Review - The Fourth Man in the Fire Pizzeria (Toronto, ON)",
@@ -491,12 +428,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "food",
-      "point_of_interest",
-      "restaurant"
-    ]
+    "types": ["establishment", "food", "point_of_interest", "restaurant"]
   },
   {
     "title": "Barstool Pizza Review - Maker Pizza (Toronto, ON)",
@@ -523,10 +455,7 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "point_of_interest"
-    ]
+    "types": ["establishment", "point_of_interest"]
   },
   {
     "title": "Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)",
@@ -553,9 +482,6 @@
         }
       }
     },
-    "types": [
-      "establishment",
-      "point_of_interest"
-    ]
+    "types": ["establishment", "point_of_interest"]
   }
 ]

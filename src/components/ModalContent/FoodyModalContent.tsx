@@ -3,21 +3,21 @@ import { BiSushi } from "react-icons/bi";
 import { TopNavItem } from "../TopNav";
 import { useState } from "react";
 import { IconType } from "react-icons";
-import { fetchYoutubeData } from "@/utils/api/api";
+import { fetchFoodyData } from "@/utils/api/api";
 
 type FoodiesItem = {
   label: string;
   icon: IconType;
-  channelId: string;
+  handle: string;
 };
 
 const foodiesItems = [
   {
     label: "Bar Stool Pizza",
     icon: CiPizza,
-    channelId: "UU5PrkGgI_cIaSStOyRmLAKA",
+    handle: "BarStoolPizza",
   },
-  { label: "Sushi", icon: BiSushi, channelId: "fakeID" },
+  { label: "Sushi", icon: BiSushi, handle: "fakeID" },
 ];
 
 const FoodyModalContent = ({ setMapMarkers }: any) => {
@@ -25,7 +25,7 @@ const FoodyModalContent = ({ setMapMarkers }: any) => {
 
   const handleSelectFoody = async (item: FoodiesItem) => {
     setActiveFoodie(item.label);
-    const data = await fetchYoutubeData(item.channelId);
+    const data = await fetchFoodyData(item.handle);
     setMapMarkers(data);
     console.log(data, "retrieved data");
   };

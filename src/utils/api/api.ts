@@ -25,9 +25,9 @@ export const fetcher = async ({ url, method, body }: FetcherProps) => {
   return data;
 };
 
-export const fetchYoutubeData = async (channelId: string) => {
+export const fetchFoodyData = async (handle: string) => {
   const data = await fetcher({
-    url: `/api/youtube?channelId=${channelId}`,
+    url: `/api/reviews?handle=${handle}`,
     method: "GET",
   });
   return data;
