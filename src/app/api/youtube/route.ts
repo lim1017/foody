@@ -3,6 +3,10 @@ import { google, youtube_v3 } from "googleapis";
 import { extractName } from "../services/openai";
 import fs from "fs/promises";
 
+import { Client } from "@googlemaps/google-maps-services-js";
+
+import barstoolData from "../data/BarStoolPizza.json";
+
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
 const fetchPlaylistItems = async (
@@ -71,81 +75,70 @@ export const GET = async (req, res) => {
   // const searchParams = req.nextUrl.searchParams;
   // const channelId = searchParams.get("channelId");
   // const name = searchParams.get('channelName');
+
   const channelId = "UU5PrkGgI_cIaSStOyRmLAKA";
   const channelName = "BarStoolPizza";
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
 
   try {
+    console.log("fetching data for", channelName);
     const videos = await fetchPlaylistItems(channelId, apiKey);
 
     const videosInToronto = await filterVideosByLocations(videos, [
       "Toronto, ON",
       "Mississauga, ON",
     ]);
-    const formattedData = formatYoutubeData(videosInToronto);
-    const dataWithNameLocation = await extractName(formattedData);
+    const formattedRestaurantData = formatYoutubeData(videosInToronto);
 
-    dataWithNameLocation.forEach((item) => {
-      const details = await fetchRestaurantAddress(
-        restaurant.restaurentName,
-        restaurant.location
-      );
-      console.log(details);
+    console.log("extracting data... for", channelName);
+    const restaurantWithNameLocation = await extractName(
+      formattedRestaurantData
+    );
+
+    console.log("getting address with google places");
+    const promises = restaurantWithNameLocation.map(async (restaurant) => {
+      const details = await fetchRestaurantAddress(restaurant);
+      return {
+        ...restaurant,
+        address: details?.[0].formatted_address,
+        geometry: details?.[0].geometry,
+        types: details?.[0].types,
+      };
     });
+
+    const dataWithAddress = await Promise.all(promises);
 
     // Write the data to a JSON file
     await fs.writeFile(
-      `${channelName}.json`,
-      JSON.stringify(dataWithNameLocation, null, 2)
+      `./src/app/api/data/${channelName}.json`,
+      JSON.stringify(dataWithAddress, null, 2)
     );
     console.log("Data successfully written to file");
 
     return NextResponse.json("Success!", { status: 200 });
   } catch (error) {
-    console.error(error);
+    console.error(error, "eeeeeeeeeeeeerrrrorrr");
     return NextResponse.json({ error: "Error fetching vi" }, { status: 500 });
   }
 };
 
-async function fetchRestaurantDetails(restaurantName, location) {
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-  const maps = google.maps({
-    version: "v3",
-    auth: apiKey,
-  });
+async function fetchRestaurantAddress(restaurant) {
+  const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
+  const client = new Client({});
+
+  const { restaurentName, location } = restaurant;
 
   try {
-    // Construct the query for the Places API
-    const response = await maps.places
-      .queryAutoComplete({
-        input: `${restaurantName}, ${location}`,
-        // Specify other parameters as needed
-      })
-      .asPromise();
+    const response = await client.geocode({
+      params: {
+        address: `${restaurentName} ${location}`,
+        key: apiKey || "",
+      },
+    });
 
-    // Assuming the first result is the desired one
-    const place = response.data.predictions[0];
-    if (!place) {
-      console.log("No place found for", restaurantName);
-      return null;
-    }
-
-    // Now get the details
-    const detailsResponse = await maps
-      .place({
-        placeId: place.place_id,
-        fields: ["name", "formatted_address", "geometry.location"],
-      })
-      .asPromise();
-
-    const details = detailsResponse.data.result;
-    return {
-      name: details.name,
-      address: details.formatted_address,
-      location: details.geometry.location, // Contains the latitude and longitude
-    };
+    return response.data.results;
   } catch (error) {
-    console.error("Error fetching restaurant details:", error);
+    console.error("Error fetching place details:", error);
     return null;
   }
 }

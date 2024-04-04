@@ -1,6 +1,7 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "indent": "off"
+    "indent": "off",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }]
   }
 }

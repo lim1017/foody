@@ -1,11 +1,63 @@
 [
   {
+    "title": "Barstool Pizza Review - Pizza Pizza (Toronto, ON) The Perfect Ending To The Toronto Series",
+    "description": "We end the Toronto series at the popular chain Pizza Pizza, where we run into the ball of sunshine that is Nareen. What an ending to the trip. \n\nDownload The One Bite App to see more and review your favorite pizza joints: https://onebite.app/download\r\n\r\nFollow on Instagram: https://www.instagram.com",
+    "thumbnail": "https://i.ytimg.com/vi/cQtqUcGxeQ0/hqdefault.jpg",
+    "videoId": "cQtqUcGxeQ0",
+    "location": "Toronto, ON",
+    "restaurantName": "Pizza Pizza",
+    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6463329,
+        "lng": -79.405351
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6475886302915,
+          "lng": -79.40394166970849
+        },
+        "southwest": {
+          "lat": 43.6448906697085,
+          "lng": -79.40663963029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "point_of_interest"
+    ]
+  },
+  {
     "title": "Barstool Pizza Review - Fresca Pizza & Pasta (Toronto, ON)",
     "description": "After a recommendation from Bill The Greek, Dave stops by Fresca's to try the now cook owned pizza spot. \n\nDownload The One Bite App to see more and review your favorite pizza joints: https://onebite.app/download\r\n\r\nFollow on Instagram: https://www.instagram.com/stoolpresidente/\r\nFollow on Twitter: ",
     "thumbnail": "https://i.ytimg.com/vi/T7mSx9ij_5Y/hqdefault.jpg",
     "videoId": "T7mSx9ij_5Y",
     "location": "Toronto, ON",
-    "restaurentName": "Fresca Pizza & Pasta"
+    "restaurantName": "Fresca Pizza & Pasta",
+    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6463329,
+        "lng": -79.405351
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6475886302915,
+          "lng": -79.40394166970849
+        },
+        "southwest": {
+          "lat": 43.6448906697085,
+          "lng": -79.40663963029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "point_of_interest"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Carlo’s Bakery (Mississauga, ON)",
@@ -13,7 +65,39 @@
     "thumbnail": "https://i.ytimg.com/vi/NLoh-NLrRPw/hqdefault.jpg",
     "videoId": "NLoh-NLrRPw",
     "location": "Mississauga, ON",
-    "restaurentName": "Carlo's Bakery"
+    "restaurantName": "Carlo’s Bakery",
+    "address": "Mississauga, ON, Canada",
+    "geometry": {
+      "bounds": {
+        "northeast": {
+          "lat": 43.737351,
+          "lng": -79.17856599999999
+        },
+        "southwest": {
+          "lat": 43.4173019,
+          "lng": -79.8101295
+        }
+      },
+      "location": {
+        "lat": 43.5890452,
+        "lng": -79.6441198
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": {
+          "lat": 43.737351,
+          "lng": -79.17856599999999
+        },
+        "southwest": {
+          "lat": 43.4173019,
+          "lng": -79.8101295
+        }
+      }
+    },
+    "types": [
+      "locality",
+      "political"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Pizza Nostra (Mississauga, ON)",
@@ -21,7 +105,39 @@
     "thumbnail": "https://i.ytimg.com/vi/sFMPJezkMrU/hqdefault.jpg",
     "videoId": "sFMPJezkMrU",
     "location": "Mississauga, ON",
-    "restaurentName": "Pizza Nostra"
+    "restaurantName": "Pizza Nostra",
+    "address": "Mississauga, ON, Canada",
+    "geometry": {
+      "bounds": {
+        "northeast": {
+          "lat": 43.737351,
+          "lng": -79.17856599999999
+        },
+        "southwest": {
+          "lat": 43.4173019,
+          "lng": -79.8101295
+        }
+      },
+      "location": {
+        "lat": 43.5890452,
+        "lng": -79.6441198
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": {
+          "lat": 43.737351,
+          "lng": -79.17856599999999
+        },
+        "southwest": {
+          "lat": 43.4173019,
+          "lng": -79.8101295
+        }
+      }
+    },
+    "types": [
+      "locality",
+      "political"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Conzo's Pizza (Toronto, ON)",
@@ -29,7 +145,29 @@
     "thumbnail": "https://i.ytimg.com/vi/Wjj3na4hft4/hqdefault.jpg",
     "videoId": "Wjj3na4hft4",
     "location": "Toronto, ON",
-    "restaurentName": "Conzo's Pizza"
+    "restaurantName": "Conzo's Pizza",
+    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6463329,
+        "lng": -79.405351
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6475886302915,
+          "lng": -79.40394166970849
+        },
+        "southwest": {
+          "lat": 43.6448906697085,
+          "lng": -79.40663963029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "point_of_interest"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Superpoint (Toronto, ON)",
@@ -37,7 +175,32 @@
     "thumbnail": "https://i.ytimg.com/vi/700SAablzcQ/hqdefault.jpg",
     "videoId": "700SAablzcQ",
     "location": "Toronto, ON",
-    "restaurantName": "Superpoint"
+    "restaurentName": "Superpoint",
+    "address": "184 Ossington Ave, Toronto, ON M6J 2Z7, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6484238,
+        "lng": -79.420603
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6497913302915,
+          "lng": -79.4191638697085
+        },
+        "southwest": {
+          "lat": 43.6470933697085,
+          "lng": -79.4218618302915
+        }
+      }
+    },
+    "types": [
+      "bar",
+      "establishment",
+      "food",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Ambassador Pizza Co (Toronto, ON)",
@@ -45,7 +208,33 @@
     "thumbnail": "https://i.ytimg.com/vi/_gEfD2JHAKk/hqdefault.jpg",
     "videoId": "_gEfD2JHAKk",
     "location": "Toronto, ON",
-    "restaurantName": "Ambassador Pizza Co"
+    "restaurentName": "Ambassador Pizza Co",
+    "address": "946 Bloor St W, Toronto, ON M6H 1L6, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6615922,
+        "lng": -79.42823489999999
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6630623302915,
+          "lng": -79.42686306970849
+        },
+        "southwest": {
+          "lat": 43.6603643697085,
+          "lng": -79.42956103029151
+        }
+      }
+    },
+    "types": [
+      "bar",
+      "establishment",
+      "food",
+      "meal_takeaway",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Frank’s Pizza House (Toronto, ON)",
@@ -53,7 +242,33 @@
     "thumbnail": "https://i.ytimg.com/vi/xAs7GqGtLFE/hqdefault.jpg",
     "videoId": "xAs7GqGtLFE",
     "location": "Toronto, ON",
-    "restaurantName": "Frank’s Pizza House"
+    "restaurentName": "Frank’s Pizza House",
+    "address": "1352 St Clair Ave W, Toronto, ON M6E 1C4, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6768558,
+        "lng": -79.44933180000001
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6781030302915,
+          "lng": -79.4479283197085
+        },
+        "southwest": {
+          "lat": 43.6754050697085,
+          "lng": -79.45062628029152
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "meal_delivery",
+      "meal_takeaway",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Pizzeria Badiali (Toronto, ON) Bonus Kidnapping",
@@ -61,7 +276,31 @@
     "thumbnail": "https://i.ytimg.com/vi/RvXvPnvDzeQ/hqdefault.jpg",
     "videoId": "RvXvPnvDzeQ",
     "location": "Toronto, ON",
-    "restaurantName": "Pizzeria Badiali"
+    "restaurentName": "Pizzeria Badiali",
+    "address": "181 Dovercourt Rd, Toronto, ON M6J 3C6, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6461154,
+        "lng": -79.42314429999999
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.64743963029149,
+          "lng": -79.42191226970849
+        },
+        "southwest": {
+          "lat": 43.64474166970849,
+          "lng": -79.4246102302915
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - One Night Only Pizza (Toronto, ON)",
@@ -69,7 +308,33 @@
     "thumbnail": "https://i.ytimg.com/vi/8fDpOvft0Mk/hqdefault.jpg",
     "videoId": "8fDpOvft0Mk",
     "location": "Toronto, ON",
-    "restaurantName": "One Night Only Pizza"
+    "restaurentName": "One Night Only Pizza",
+    "address": "581 Pape Ave, Toronto, ON M4K 3R5, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.675054,
+        "lng": -79.34302199999999
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6763773802915,
+          "lng": -79.34179136970849
+        },
+        "southwest": {
+          "lat": 43.6736794197085,
+          "lng": -79.3444893302915
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "meal_takeaway",
+      "point_of_interest",
+      "restaurant",
+      "store"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Descendant Detroit Style Pizza (Toronto, ON)",
@@ -77,7 +342,32 @@
     "thumbnail": "https://i.ytimg.com/vi/Aj9Y1N5G4NE/hqdefault.jpg",
     "videoId": "Aj9Y1N5G4NE",
     "location": "Toronto, ON",
-    "restaurantName": "Descendant Detroit Style Pizza"
+    "restaurentName": "Descendant Detroit Style Pizza",
+    "address": "1168 Queen St E, Toronto, ON M4M 1L4, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6629183,
+        "lng": -79.3323893
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6641955302915,
+          "lng": -79.33101741970849
+        },
+        "southwest": {
+          "lat": 43.6614975697085,
+          "lng": -79.33371538029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "meal_takeaway",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Pizza Gigi (Toronto, ON)",
@@ -85,7 +375,32 @@
     "thumbnail": "https://i.ytimg.com/vi/FVT-tWo8Uok/hqdefault.jpg",
     "videoId": "FVT-tWo8Uok",
     "location": "Toronto, ON",
-    "restaurantName": "Pizza Gigi"
+    "restaurentName": "Pizza Gigi",
+    "address": "189 Harbord St, Toronto, ON M5S 1H5, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6616759,
+        "lng": -79.4083467
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6630932302915,
+          "lng": -79.4070010697085
+        },
+        "southwest": {
+          "lat": 43.6603952697085,
+          "lng": -79.4096990302915
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "meal_delivery",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Blondies Pizza (Toronto, ON)",
@@ -93,7 +408,31 @@
     "thumbnail": "https://i.ytimg.com/vi/Sfe3eZV3h1Q/hqdefault.jpg",
     "videoId": "Sfe3eZV3h1Q",
     "location": "Toronto, ON",
-    "restaurantName": "Blondies Pizza"
+    "restaurentName": "Blondies Pizza",
+    "address": "88 Ossington Ave Unit 2, Toronto, ON M6J 2Z4, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6461025,
+        "lng": -79.41978739999999
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6474740302915,
+          "lng": -79.41831556970848
+        },
+        "southwest": {
+          "lat": 43.64477606970851,
+          "lng": -79.4210135302915
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Bitondo's Pizzeria (Toronto, ON)",
@@ -101,7 +440,31 @@
     "thumbnail": "https://i.ytimg.com/vi/BXs_x5UnBrw/hqdefault.jpg",
     "videoId": "BXs_x5UnBrw",
     "location": "Toronto, ON",
-    "restaurantName": "Bitondo's Pizzeria"
+    "restaurentName": "Bitondo's Pizzeria",
+    "address": "11 Clinton St, Toronto, ON M6J 2N7, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6541381,
+        "lng": -79.4132242
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6554696802915,
+          "lng": -79.41197961970849
+        },
+        "southwest": {
+          "lat": 43.6527717197085,
+          "lng": -79.41467758029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - The Fourth Man in the Fire Pizzeria (Toronto, ON)",
@@ -109,7 +472,31 @@
     "thumbnail": "https://i.ytimg.com/vi/X2KAX29n4Yw/hqdefault.jpg",
     "videoId": "X2KAX29n4Yw",
     "location": "Toronto, ON",
-    "restaurantName": "The Fourth Man in the Fire Pizzeria"
+    "restaurentName": "The Fourth Man in the Fire Pizzeria",
+    "address": "832 Dundas St W, Toronto, ON M6J 1V3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6517122,
+        "lng": -79.4094993
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6529968302915,
+          "lng": -79.4082103697085
+        },
+        "southwest": {
+          "lat": 43.6502988697085,
+          "lng": -79.4109083302915
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "food",
+      "point_of_interest",
+      "restaurant"
+    ]
   },
   {
     "title": "Barstool Pizza Review - Maker Pizza (Toronto, ON)",
@@ -117,7 +504,29 @@
     "thumbnail": "https://i.ytimg.com/vi/GwLmydKOux8/hqdefault.jpg",
     "videoId": "GwLmydKOux8",
     "location": "Toronto, ON",
-    "restaurantName": "Maker Pizza"
+    "restaurantName": "Maker Pizza",
+    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6463329,
+        "lng": -79.405351
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6475886302915,
+          "lng": -79.40394166970849
+        },
+        "southwest": {
+          "lat": 43.6448906697085,
+          "lng": -79.40663963029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "point_of_interest"
+    ]
   },
   {
     "title": "Barstool Pizza Review - North of Brooklyn Pizzeria (Toronto, ON)",
@@ -125,6 +534,28 @@
     "thumbnail": "https://i.ytimg.com/vi/Gvj6eTHxstE/hqdefault.jpg",
     "videoId": "Gvj6eTHxstE",
     "location": "Toronto, ON",
-    "restaurantName": "North Of Brooklyn Pizzeria"
+    "restaurantName": "North Of Brooklyn Pizzeria",
+    "address": "660 Richmond St W, Toronto, ON M6J 1C3, Canada",
+    "geometry": {
+      "location": {
+        "lat": 43.6463329,
+        "lng": -79.405351
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 43.6475886302915,
+          "lng": -79.40394166970849
+        },
+        "southwest": {
+          "lat": 43.6448906697085,
+          "lng": -79.40663963029151
+        }
+      }
+    },
+    "types": [
+      "establishment",
+      "point_of_interest"
+    ]
   }
 ]
