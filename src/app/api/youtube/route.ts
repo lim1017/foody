@@ -5,7 +5,6 @@ import fs from "fs/promises";
 import { YoutubeTranscript } from "youtube-transcript";
 
 import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js";
-import BarStoolPizza from "../data/BarStoolPizza.json";
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
 // Use map to extract the 'text' property from each transcript object to a single string

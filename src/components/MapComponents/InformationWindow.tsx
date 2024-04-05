@@ -1,4 +1,6 @@
 import { InfoWindow } from "@react-google-maps/api";
+import "./Map.css";
+import Image from "next/image";
 
 const InformationWindow = ({ marker }) => {
   console.log(marker);
@@ -9,9 +11,14 @@ const InformationWindow = ({ marker }) => {
     <InfoWindow position={{ lat, lng }}>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
         <img
-          className="w-full"
+          className="info-img"
           src={marker.thumbnail}
           alt={marker.restaurantName}
+          onClick={() =>
+            window.open(
+              `https://www.youtube.com/watch?v=${marker.videoId}', '_blank`
+            )
+          }
         />
 
         <div className="px-6 py-4">

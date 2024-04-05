@@ -67,6 +67,8 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
     >
       <GoogleMap
+        clickableIcons={false}
+        onClick={() => setActiveMarker(null)}
         mapContainerStyle={containerStyle}
         options={mapOptions}
         center={currentLocation}
