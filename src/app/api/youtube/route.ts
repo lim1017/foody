@@ -44,8 +44,6 @@ const fetchPlaylistItems = async (
       "Mississauga, ON",
     ]);
 
-    console.log(filteredVideoList.length, "filtered videos length");
-
     for (let i = 0; i < filteredVideoList.length; i++) {
       const videoId = filteredVideoList[i].snippet.resourceId.videoId;
       try {
@@ -124,7 +122,6 @@ export const GET = async (req, res) => {
 
     const promises = restaurantWithNameLocation.map(async (restaurant) => {
       const details = await fetchRestaurantAddress(restaurant);
-      console.log(details, "details with address");
       return {
         ...restaurant,
         address: details.formatted_address,

@@ -6,6 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
+import InformationWindow from "./InformationWindow";
 
 interface MapProps {
   mapMarkers: any[];
@@ -20,12 +21,6 @@ const defaultCenter = {
   lat: -34.397,
   lng: 150.644,
 };
-
-const markers = [
-  { id: 1, name: "home", lat: 43.76394, lng: -79.26897 },
-  { id: 2, name: "store1", lat: 43.81812, lng: -79.1016 },
-  { id: 3, name: "store2", lat: 43.71435, lng: -79.35466 },
-];
 
 const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
   const [isMobile, setIsMobile] = useState(true);
@@ -88,12 +83,7 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
               position={{ lat, lng }}
             >
               {activeMarker === marker.videoId && (
-                <InfoWindow position={{ lat, lng }}>
-                  <div>
-                    <div>{marker.restaurantName}asdkjhaskjdh</div>
-                    <div>{marker.address}</div>
-                  </div>
-                </InfoWindow>
+                <InformationWindow marker={marker} />
               )}
             </Marker>
           );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Map from "@/components/Map";
+import Map from "@/components/MapComponents/Map";
 import TopNav from "@/components/TopNav";
 import Head from "next/head";
 
