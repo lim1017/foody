@@ -29,53 +29,54 @@ const fetchPlaylistItems = async (
   let pageToken = "";
   const videos: VideoItem[] = [];
 
-  do {
-    const response = await youtube.playlistItems.list({
-      part: "snippet",
-      playlistId: playlistId,
-      maxResults: 2, // Maximum allowed by the API
-      pageToken: pageToken,
-    });
+  // do {
+  const response = await youtube.playlistItems.list({
+    part: "snippet",
+    playlistId: playlistId,
+    maxResults: 2, // Maximum allowed by the API
+    pageToken: pageToken,
+  });
 
-    const videoList: VideoItem[] = response.data.items;
+  const videoList: VideoItem[] = response.data.items;
 
-    const filteredVideoList = filterVideosByLocations(videoList, [
-      "Toronto",
-      "Mississauga",
-      "Richmond Hill",
-      "Vaughan",
-    ]);
+  const filteredVideoList = filterVideosByLocations(videoList, [
+    "Toronto",
+    "Mississauga",
+    "Richmond Hill",
+    "Vaughan",
+  ]);
 
-    for (let i = 0; i < filteredVideoList.length; i++) {
-      const videoId = filteredVideoList[i].snippet.resourceId.videoId;
+  for (let i = 0; i < filteredVideoList.length; i++) {
+    const videoId = filteredVideoList[i].snippet.resourceId.videoId;
 
-      try {
-        if (!videoId) throw "No VideoId";
-        const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
-        const stringTranscript = stitchTranscripts(transcriptData);
-        filteredVideoList[i].snippet.transcript = stringTranscript;
-      } catch (error) {
-        console.error(
-          `Failed to fetch transcript for video ID ${videoId}: ${error}`
-        );
+    try {
+      if (!videoId) throw "No VideoId";
+      const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
+      const stringTranscript = stitchTranscripts(transcriptData);
+      filteredVideoList[i].snippet.transcript = stringTranscript;
+    } catch (error) {
+      console.error(
+        `Failed to fetch transcript for video ID ${videoId}: ${error}`
+      );
 
-        console.info(
-          "fetching transcript for video ID with backup caption scraper",
-          videoId
-        );
-        getSubtitles({
-          videoID: videoId,
-          lang: "en",
-        }).then((captions) => {
-          const stringTranscript = stitchTranscripts(captions);
-          filteredVideoList[i].snippet.transcript = stringTranscript;
-        });
-      }
+      console.info(
+        "fetching transcript for video ID with backup caption scraper",
+        videoId
+      );
+      const captions = await getSubtitles({
+        videoID: videoId,
+        lang: "en",
+      });
+
+      const stringTranscript = stitchTranscripts(captions);
+
+      filteredVideoList[i].snippet.transcript = stringTranscript;
     }
+  }
 
-    videos.push(...filteredVideoList);
-    pageToken = response.data.nextPageToken;
-  } while (pageToken);
+  videos.push(...filteredVideoList);
+  pageToken = response.data.nextPageToken;
+  // } while (pageToken);
 
   return videos;
 };
@@ -128,7 +129,6 @@ export const GET = async (req, res) => {
   try {
     console.log("fetching data for", channelName);
     const videos = await fetchPlaylistItems(channelId, apiKey);
-
     const formattedRestaurantData = formatYoutubeData(videos);
 
     console.log("extracting data... for", channelName);
