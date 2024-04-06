@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
 import InformationWindow from "./InformationWindow";
 
@@ -51,9 +46,9 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       setMapOptions({
-        streetViewControl: !mobile,
+        streetViewControl: false,
         mapTypeControl: !mobile,
-        zoomControl: !mobile,
+        zoomControl: false,
         fullscreenControl: !isMobile,
       });
     };

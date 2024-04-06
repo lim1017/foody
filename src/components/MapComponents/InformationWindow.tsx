@@ -1,6 +1,5 @@
 import { InfoWindow } from "@react-google-maps/api";
 import "./Map.css";
-import Image from "next/image";
 
 const InformationWindow = ({ marker }) => {
   console.log(marker);

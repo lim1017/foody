@@ -3,6 +3,7 @@ import { google, youtube_v3 } from "googleapis";
 import { extractName } from "../services/openai";
 import fs from "fs/promises";
 import { YoutubeTranscript } from "youtube-transcript";
+import { getSubtitles } from "youtube-captions-scraper";
 
 import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js";
 type VideoItem = youtube_v3.Schema$PlaylistItem;
@@ -32,20 +33,24 @@ const fetchPlaylistItems = async (
     const response = await youtube.playlistItems.list({
       part: "snippet",
       playlistId: playlistId,
-      maxResults: 50, // Maximum allowed by the API
+      maxResults: 2, // Maximum allowed by the API
       pageToken: pageToken,
     });
 
-    const videoList = response.data.items;
+    const videoList: VideoItem[] = response.data.items;
 
-    const filteredVideoList = await filterVideosByLocations(videoList, [
-      "Toronto, ON",
-      "Mississauga, ON",
+    const filteredVideoList = filterVideosByLocations(videoList, [
+      "Toronto",
+      "Mississauga",
+      "Richmond Hill",
+      "Vaughan",
     ]);
 
     for (let i = 0; i < filteredVideoList.length; i++) {
       const videoId = filteredVideoList[i].snippet.resourceId.videoId;
+
       try {
+        if (!videoId) throw "No VideoId";
         const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
         const stringTranscript = stitchTranscripts(transcriptData);
         filteredVideoList[i].snippet.transcript = stringTranscript;
@@ -53,6 +58,18 @@ const fetchPlaylistItems = async (
         console.error(
           `Failed to fetch transcript for video ID ${videoId}: ${error}`
         );
+
+        console.info(
+          "fetching transcript for video ID with backup caption scraper",
+          videoId
+        );
+        getSubtitles({
+          videoID: videoId,
+          lang: "en",
+        }).then((captions) => {
+          const stringTranscript = stitchTranscripts(captions);
+          filteredVideoList[i].snippet.transcript = stringTranscript;
+        });
       }
     }
 
@@ -63,10 +80,10 @@ const fetchPlaylistItems = async (
   return videos;
 };
 
-const filterVideosByLocations = async (
+const filterVideosByLocations = (
   videos: VideoItem[],
   locations: string[]
-): Promise<VideoItem[]> => {
+): VideoItem[] => {
   return videos.filter((video) => {
     const snippet = video.snippet;
     if (!snippet) return false;
@@ -90,7 +107,7 @@ const formatYoutubeData = (data: any) => {
   return data.map((item: any) => {
     return {
       title: item.snippet.title,
-      description: item.snippet.description.substring(0, 300),
+      description: item.snippet.description.substring(0, 400),
       thumbnail: item.snippet.thumbnails.high.url,
       videoId: item.snippet.resourceId.videoId,
       transcript: item.snippet.transcript,
@@ -98,14 +115,14 @@ const formatYoutubeData = (data: any) => {
   });
 };
 
-//fetches playlist items, filters by locations, uses OpenAI to extrat name and location and writes data to a JSON file.  TODO: because LLM output is inconsistant and sometime returns invalid json or incorrect data, need to create steps we can continue from instead of starting over each time
+//fetches playlist items, filters by locations, uses OpenAI to extrat name and location and writes data to a JSON file.  TODO: because LLM output is inconsistant and sometime returns invalid json or incorrect data, create steps we can continue from instead of starting over each time??
 export const GET = async (req, res) => {
   // const searchParams = req.nextUrl.searchParams;
   // const channelId = searchParams.get("channelId");
   // const name = searchParams.get('channelName');
 
-  const channelId = "UU5PrkGgI_cIaSStOyRmLAKA";
-  const channelName = "BarStoolPizza";
+  const channelId = "PL0fOlXVeVW9Sk6JglFIvEYFJBu0Vkm1JV";
+  const channelName = "StrictlyDumping";
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
 
   try {
@@ -119,22 +136,24 @@ export const GET = async (req, res) => {
       formattedRestaurantData
     );
 
-    const promises = restaurantWithNameLocation.map(async (restaurant) => {
-      const details = await fetchRestaurantAddress(restaurant);
-      return {
-        ...restaurant,
-        address: details.formatted_address,
-        placeId: details.place_id,
-        geometry: details.geometry,
-        types: details.types,
-      };
-    });
+    const addressPromises = restaurantWithNameLocation.map(
+      async (restaurant) => {
+        const details = await fetchRestaurantAddress(restaurant);
+        return {
+          ...restaurant,
+          address: details.formatted_address,
+          placeId: details.place_id,
+          geometry: details.geometry,
+          types: details.types,
+        };
+      }
+    );
 
-    const dataWithAddress = await Promise.all(promises);
+    const dataWithAddress = await Promise.all(addressPromises);
 
     // Write the data to a JSON file
     await fs.writeFile(
-      `./src/app/api/data/${channelName}.json`,
+      `./src/app/api/data/${channelName}2.json`,
       JSON.stringify(dataWithAddress, null, 2)
     );
     console.log("Data successfully written to file");
