@@ -8,6 +8,8 @@ import { getSubtitles } from "youtube-captions-scraper";
 import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js";
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
+import StrictlyDumping2 from "../../../app/api/data/StrictlyDumping2.json";
+
 // Use map to extract the 'text' property from each transcript object to a single string
 function stitchTranscripts(transcripts: any[]) {
   const transcriptTexts = transcripts.map((transcript) => transcript.text);
@@ -29,54 +31,54 @@ const fetchPlaylistItems = async (
   let pageToken = "";
   const videos: VideoItem[] = [];
 
-  // do {
-  const response = await youtube.playlistItems.list({
-    part: "snippet",
-    playlistId: playlistId,
-    maxResults: 2, // Maximum allowed by the API
-    pageToken: pageToken,
-  });
+  do {
+    const response = await youtube.playlistItems.list({
+      part: "snippet",
+      playlistId: playlistId,
+      maxResults: 2, // Maximum allowed by the API
+      pageToken: pageToken,
+    });
 
-  const videoList: VideoItem[] = response.data.items;
+    const videoList: VideoItem[] = response.data.items;
 
-  const filteredVideoList = filterVideosByLocations(videoList, [
-    "Toronto",
-    "Mississauga",
-    "Richmond Hill",
-    "Vaughan",
-  ]);
+    const filteredVideoList = filterVideosByLocations(videoList, [
+      "Toronto",
+      "Mississauga",
+      "Richmond Hill",
+      "Vaughan",
+    ]);
 
-  for (let i = 0; i < filteredVideoList.length; i++) {
-    const videoId = filteredVideoList[i].snippet.resourceId.videoId;
+    for (let i = 0; i < filteredVideoList.length; i++) {
+      const videoId = filteredVideoList[i].snippet.resourceId.videoId;
 
-    try {
-      if (!videoId) throw "No VideoId";
-      const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
-      const stringTranscript = stitchTranscripts(transcriptData);
-      filteredVideoList[i].snippet.transcript = stringTranscript;
-    } catch (error) {
-      console.error(
-        `Failed to fetch transcript for video ID ${videoId}: ${error}`
-      );
+      try {
+        if (!videoId) throw "No VideoId";
+        const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
+        const stringTranscript = stitchTranscripts(transcriptData);
+        filteredVideoList[i].snippet.transcript = stringTranscript;
+      } catch (error) {
+        console.error(
+          `Failed to fetch transcript for video ID ${videoId}: ${error}`
+        );
 
-      console.info(
-        "fetching transcript for video ID with backup caption scraper",
-        videoId
-      );
-      const captions = await getSubtitles({
-        videoID: videoId,
-        lang: "en",
-      });
+        console.info(
+          "fetching transcript for video ID with backup caption scraper",
+          videoId
+        );
+        const captions = await getSubtitles({
+          videoID: videoId,
+          lang: "en",
+        });
 
-      const stringTranscript = stitchTranscripts(captions);
+        const stringTranscript = stitchTranscripts(captions);
 
-      filteredVideoList[i].snippet.transcript = stringTranscript;
+        filteredVideoList[i].snippet.transcript = stringTranscript;
+      }
     }
-  }
 
-  videos.push(...filteredVideoList);
-  pageToken = response.data.nextPageToken;
-  // } while (pageToken);
+    videos.push(...filteredVideoList);
+    pageToken = response.data.nextPageToken;
+  } while (pageToken);
 
   return videos;
 };
@@ -139,13 +141,7 @@ export const GET = async (req, res) => {
     const addressPromises = restaurantWithNameLocation.map(
       async (restaurant) => {
         const details = await fetchRestaurantAddress(restaurant);
-        return {
-          ...restaurant,
-          address: details.formatted_address,
-          placeId: details.place_id,
-          geometry: details.geometry,
-          types: details.types,
-        };
+        return { ...restaurant, locations: details };
       }
     );
 
@@ -166,25 +162,39 @@ export const GET = async (req, res) => {
 };
 
 async function fetchRestaurantAddress(restaurant: {
-  restaurantName: string;
-  location: string;
+  locations: { city: string; restaurantName: string }[];
 }) {
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
   const client = new Client({});
-  const { restaurantName, location } = restaurant;
+  const { locations } = restaurant;
   try {
-    const placeIdResponse = await client.findPlaceFromText({
-      params: {
-        input: `${restaurantName}, ${location}`,
-        inputtype: PlaceInputType.textQuery,
-        key: apiKey || "",
-        fields: ["formatted_address", "name", "geometry", "place_id", "types"],
-      },
+    // Map locations to a list of promises using async operations
+    const promises = locations.map(async (location) => {
+      const { restaurantName, city } = location;
+      const placeIdResponse = await client.findPlaceFromText({
+        params: {
+          input: `${restaurantName}, ${city}`,
+          inputtype: PlaceInputType.textQuery,
+          key: apiKey,
+          fields: [
+            "formatted_address",
+            "name",
+            "geometry",
+            "place_id",
+            "types",
+          ],
+        },
+      });
+
+      const placeInfo = placeIdResponse.data.candidates[0] || {};
+
+      return { ...location, geolocation: placeInfo };
     });
 
-    const placeInfo = placeIdResponse.data.candidates[0];
+    // Wait for all the promises to resolve
+    const updatedLocations = await Promise.all(promises);
 
-    return placeInfo;
+    return updatedLocations;
   } catch (error) {
     console.error("Error fetching place details:", error);
     return null;
