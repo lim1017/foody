@@ -31,12 +31,7 @@
           },
           "name": "Fishman Lobster Clubhouse Restaurant 魚樂軒",
           "place_id": "ChIJ28ikZwLU1IkR1kc5w0E-x9E",
-          "types": [
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       }
     ],
@@ -109,11 +104,7 @@
           },
           "name": "Pacific Mall",
           "place_id": "ChIJy1o5sg7U1IkRXf3WKhRxFFY",
-          "types": [
-            "shopping_mall",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["shopping_mall", "point_of_interest", "establishment"]
         }
       }
     ],
@@ -151,12 +142,7 @@
           },
           "name": "The ONE Fusion Cuisine",
           "place_id": "ChIJr44DZuArK4gRz7gVHK8xQj4",
-          "types": [
-            "restaurant",
-            "point_of_interest",
-            "food",
-            "establishment"
-          ]
+          "types": ["restaurant", "point_of_interest", "food", "establishment"]
         }
       }
     ],
@@ -194,12 +180,7 @@
           },
           "name": "Chengdu Spicy Chinese Cuisine",
           "place_id": "ChIJAwSmU43R1IkRWpslOvBll1I",
-          "types": [
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       },
       {
@@ -271,12 +252,7 @@
           },
           "name": "Mikaku Udon Bar",
           "place_id": "ChIJC4dqgvkrK4gRbZkf7opTy4c",
-          "types": [
-            "restaurant",
-            "point_of_interest",
-            "food",
-            "establishment"
-          ]
+          "types": ["restaurant", "point_of_interest", "food", "establishment"]
         }
       },
       {
@@ -338,12 +314,7 @@
           },
           "name": "Cho SAN Sushi",
           "place_id": "ChIJ8WMOi_HV1IkRydr6el1i6aA",
-          "types": [
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       },
       {
@@ -371,12 +342,7 @@
           },
           "name": "Shu Kingdom General Hot Pot 巴蜀大将火锅",
           "place_id": "ChIJ0bs1w1_T1IkRMDCOL40OxR4",
-          "types": [
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       }
     ],
@@ -414,12 +380,7 @@
           },
           "name": "Regatta Buffet",
           "place_id": "ChIJ8yn6RyFjL4kRAbXREZsTAZ0",
-          "types": [
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       },
       {
@@ -447,12 +408,7 @@
           },
           "name": "Tang Home Style Lamb & Beef",
           "place_id": "ChIJz8LNcFjR1IkRk86zHjdkrGM",
-          "types": [
-            "restaurant",
-            "point_of_interest",
-            "food",
-            "establishment"
-          ]
+          "types": ["restaurant", "point_of_interest", "food", "establishment"]
         }
       },
       {
@@ -480,15 +436,172 @@
           },
           "name": "Vasan’s Tacos",
           "place_id": "ChIJ736YSJfR1IkRRUl3evxvyN4",
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
+        }
+      }
+    ],
+    "lastUpdated": 1712551097046
+  },
+  {
+    "title": "Vietnamese CHICKEN & WAFFLES, Thai Pizza & 10/10 MUST TRY Egg Tarts in Toronto",
+    "description": "Eating some unique Toronto local specialties; Thai pizza and Vietnamese pho poutine. Finished the day with one of the best egg tarts you HAVE to try!\n\nJason's Bakery\n352 Oakwood Ave, York, ON M6E 2W1, Canada\n\nDzô Viet Eatery\n308 Dundas St W, Toronto, ON M5T 1G4, Canada\n\nTut's\n567 King St W, Toronto, ON M5V 1M1, Canada\n\n6ix Donutz\n83 Portland St, Toronto, ON M5V 2M9, Canada\n\nSOI 🇹🇭 Snacks\nKing S",
+    "thumbnail": "https://i.ytimg.com/vi/_DQ5Bo5KyO4/hqdefault.jpg",
+    "videoId": "_DQ5Bo5KyO4",
+    "transcript": "[Music] hey guys good morning it's Mike Chen here in Toronto it's about 8:00 in the morning and today is going to be a food packed day starting with a tour of a atar [Music] factory and to show me around this is Jason so Jason you opened this um atar authentic Portuguese atar authentic Portuguese what it called officially uh Pata we follow an authentic recipe from Lisbon in Portugal which you should be familiar we brought the recipe be here at Toronto and we created a brand called more nates please you started this just a few years ago and tell me about what you have here we have our authentic the classic pistel Donata then we have the Almond one and then we have the Nutella one and then at our other location which is downtown Toronto we also do the raspberry the gluten-free and the vegan everything behind this store everything you're baking at right there you told me you start at 3:00 in the mornin...",
+    "locations": [
+      {
+        "city": "Toronto, ON",
+        "restaurantName": "Jason's Bakery",
+        "tagLine": "Authentic Portuguese atar",
+        "score": "N/A",
+        "geolocation": {
+          "formatted_address": "352 Oakwood Ave, York, ON M6E 2W1, Canada",
+          "geometry": {
+            "location": {
+              "lat": 43.68667139999999,
+              "lng": -79.43876449999999
+            },
+            "viewport": {
+              "northeast": {
+                "lat": 43.68805807989272,
+                "lng": -79.43730417010728
+              },
+              "southwest": {
+                "lat": 43.68535842010728,
+                "lng": -79.44000382989273
+              }
+            }
+          },
+          "name": "Jason's Bakery",
+          "place_id": "ChIJIRaAw4gzK4gRi0tJyTFozoA",
           "types": [
-            "restaurant",
+            "bakery",
+            "store",
             "food",
             "point_of_interest",
             "establishment"
           ]
         }
+      },
+      {
+        "city": "Toronto, ON",
+        "restaurantName": "Dzô Viet Eatery",
+        "tagLine": "Vietnamese PHO Poutine",
+        "score": "N/A",
+        "geolocation": {
+          "formatted_address": "308 Dundas St W, Toronto, ON M5T 1G4, Canada",
+          "geometry": {
+            "location": {
+              "lat": 43.6544343,
+              "lng": -79.3917783
+            },
+            "viewport": {
+              "northeast": {
+                "lat": 43.65569527989272,
+                "lng": -79.39039297010727
+              },
+              "southwest": {
+                "lat": 43.65299562010728,
+                "lng": -79.39309262989272
+              }
+            }
+          },
+          "name": "Dzô Viet Eatery",
+          "place_id": "ChIJI1kf3zc1K4gR6p-abgSPy1o",
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
+        }
+      },
+      {
+        "city": "Toronto, ON",
+        "restaurantName": "Tut's",
+        "tagLine": "Thai Pizza, Egg Tarts",
+        "score": "N/A",
+        "geolocation": {
+          "formatted_address": "567 King St W, Toronto, ON M5V 1M1, Canada",
+          "geometry": {
+            "location": {
+              "lat": 43.6443887,
+              "lng": -79.3994032
+            },
+            "viewport": {
+              "northeast": {
+                "lat": 43.64557877989272,
+                "lng": -79.39831767010728
+              },
+              "southwest": {
+                "lat": 43.64287912010728,
+                "lng": -79.40101732989271
+              }
+            }
+          },
+          "name": "Tut's Egyptian Street Food",
+          "place_id": "ChIJ_-etCE81K4gRyTsn9avI36k",
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
+        }
+      },
+      {
+        "city": "Toronto, ON",
+        "restaurantName": "6ix Donutz",
+        "tagLine": "Fresh Donuts",
+        "score": "N/A",
+        "geolocation": {
+          "formatted_address": "83 Portland St, Toronto, ON M5V 2M9, Canada",
+          "geometry": {
+            "location": {
+              "lat": 43.6441344,
+              "lng": -79.3997699
+            },
+            "viewport": {
+              "northeast": {
+                "lat": 43.64545952989272,
+                "lng": -79.39847257010727
+              },
+              "southwest": {
+                "lat": 43.64275987010728,
+                "lng": -79.40117222989272
+              }
+            }
+          },
+          "name": "6ix Donutz",
+          "place_id": "ChIJU_0xe541K4gRLdJ1tcTxMDo",
+          "types": [
+            "bakery",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+          ]
+        }
+      },
+      {
+        "city": "Toronto, ON",
+        "restaurantName": "SOI 🇹🇭 Snacks",
+        "tagLine": "Northern Thai Snacks",
+        "score": "N/A",
+        "geolocation": {
+          "formatted_address": "9390 Woodbine Ave King Square Food Court #1FC15, Markham, ON L6C 0M5, Canada",
+          "geometry": {
+            "location": {
+              "lat": 43.8727161,
+              "lng": -79.3643046
+            },
+            "viewport": {
+              "northeast": {
+                "lat": 43.87413192989271,
+                "lng": -79.36297257010727
+              },
+              "southwest": {
+                "lat": 43.87143227010727,
+                "lng": -79.36567222989272
+              }
+            }
+          },
+          "name": "SOI Snacks",
+          "place_id": "ChIJGY7DN0LV1IkR5w6yGSs5HKI",
+          "types": ["restaurant", "food", "point_of_interest", "establishment"]
+        }
       }
     ],
-    "lastUpdated": 1712551097046
+    "lastUpdated": 1712551159709
   }
 ]
