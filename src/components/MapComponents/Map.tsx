@@ -31,11 +31,11 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
 
   const { currentLocation } = useCurrentLocation(defaultCenter);
 
-  const handleActiveMarker = (markerId: number) => {
-    if (markerId === activeMarker) {
+  const handleActiveMarker = (placeId: number) => {
+    if (placeId === activeMarker) {
       setActiveMarker(null);
     } else {
-      setActiveMarker(markerId);
+      setActiveMarker(placeId);
     }
   };
 
@@ -56,7 +56,6 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
@@ -69,21 +68,27 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
         center={currentLocation}
         zoom={12}
       >
-        {mapMarkers.map((marker) => {
-          const lat = marker.geometry.location.lat;
-          const lng = marker.geometry.location.lng;
-          return (
-            <Marker
-              key={marker.id}
-              onClick={(e) => handleActiveMarker(marker.videoId)}
-              clickable={true}
-              position={{ lat, lng }}
-            >
-              {activeMarker === marker.videoId && (
-                <InformationWindow marker={marker} />
-              )}
-            </Marker>
-          );
+        {mapMarkers.map((video) => {
+          return video.locations.map((marker) => {
+            const lat = marker.geolocation.geometry.location.lat;
+            const lng = marker.geolocation.geometry.location.lng;
+            return (
+              <Marker
+                key={marker.place_id}
+                onClick={(e) => handleActiveMarker(marker.geolocation.place_id)}
+                clickable={true}
+                position={{ lat, lng }}
+              >
+                {activeMarker === marker.geolocation.place_id && (
+                  <InformationWindow
+                    marker={marker}
+                    videoId={video.videoId}
+                    thumbnail={video.thumbnail}
+                  />
+                )}
+              </Marker>
+            );
+          });
         })}
       </GoogleMap>
     </LoadScript>

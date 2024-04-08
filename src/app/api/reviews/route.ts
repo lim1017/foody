@@ -1,4 +1,6 @@
 import BarStoolPizza from "../data/BarStoolPizza.json";
+import StrictlyDumping from "../data/StrictlyDumping.json";
+
 import { NextResponse } from "next/server";
 
 export const GET = async (req, res) => {
@@ -10,6 +12,9 @@ export const GET = async (req, res) => {
   switch (handle) {
     case "BarStoolPizza":
       data = BarStoolPizza;
+      break;
+    case "StrictlyDumping":
+      data = StrictlyDumping;
       break;
     default:
       return NextResponse.json(

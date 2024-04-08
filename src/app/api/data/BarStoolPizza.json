@@ -308,15 +308,15 @@
       },
       {
         "city": "Toronto, ON",
-        "restaurantName": "Fresco",
+        "restaurantName": "Fresca Pizza & Pasta",
         "tagLine": "OG spot with a rich history",
         "score": "N/A",
         "geolocation": {
-          "formatted_address": "1255 McCowan Rd, Scarborough, ON M1H 2K3, Canada",
+          "formatted_address": "302 College St, Toronto, ON M5T 1R9, Canada",
           "geometry": {
             "location": {
-              "lat": 43.774042,
-              "lng": -79.25137
+              "lat": 43.65773,
+              "lng": -79.40164
             },
             "viewport": {
               "northeast": {
@@ -329,7 +329,7 @@
               }
             }
           },
-          "name": "FreshCo McCowan & Ellesmere",
+          "name": "Fresca Pizza & Pasta",
           "place_id": "ChIJvw3Sra7R1IkRecHmyAObQ-M",
           "types": [
             "grocery_or_supermarket",
@@ -731,69 +731,6 @@
           },
           "name": "Blondies Pizza - Leslieville",
           "place_id": "ChIJgSHrJlbL1IkRGDlCb6uPblk",
-          "types": ["restaurant", "food", "point_of_interest", "establishment"]
-        }
-      },
-      {
-        "city": "Toronto, ON",
-        "restaurantName": "Frank's Pizza House",
-        "tagLine": "Pizza maker with limited vision",
-        "score": "NA",
-        "geolocation": {
-          "formatted_address": "1352 St Clair Ave W, Toronto, ON M6E 1C4, Canada",
-          "geometry": {
-            "location": {
-              "lat": 43.6768558,
-              "lng": -79.44933180000001
-            },
-            "viewport": {
-              "northeast": {
-                "lat": 43.67810387989272,
-                "lng": -79.44792747010729
-              },
-              "southwest": {
-                "lat": 43.67540422010727,
-                "lng": -79.45062712989272
-              }
-            }
-          },
-          "name": "Frank’s Pizza House - Corso Italia",
-          "place_id": "ChIJ99fWIQ00K4gRAIy_0uz5vaM",
-          "types": [
-            "meal_delivery",
-            "meal_takeaway",
-            "restaurant",
-            "food",
-            "point_of_interest",
-            "establishment"
-          ]
-        }
-      },
-      {
-        "city": "Toronto, ON",
-        "restaurantName": "Pizza GiGi",
-        "tagLine": "Oldest pizza maker in the city",
-        "score": "NA",
-        "geolocation": {
-          "formatted_address": "189 Harbord St, Toronto, ON M5S 1H5, Canada",
-          "geometry": {
-            "location": {
-              "lat": 43.6617025,
-              "lng": -79.4083461
-            },
-            "viewport": {
-              "northeast": {
-                "lat": 43.66309407989272,
-                "lng": -79.40700022010728
-              },
-              "southwest": {
-                "lat": 43.66039442010727,
-                "lng": -79.40969987989271
-              }
-            }
-          },
-          "name": "Pizza Gigi",
-          "place_id": "ChIJ80vNp5Q0K4gRiQzP_8tzyg0",
           "types": ["restaurant", "food", "point_of_interest", "establishment"]
         }
       }

@@ -1,5 +1,5 @@
 import { CiPizza } from "react-icons/ci";
-import { BiSushi } from "react-icons/bi";
+import { GiDumplingBao } from "react-icons/gi";
 import { TopNavItem } from "../TopNav";
 import { useState } from "react";
 import { IconType } from "react-icons";
@@ -17,7 +17,7 @@ const foodiesItems = [
     icon: CiPizza,
     handle: "BarStoolPizza",
   },
-  { label: "Sushi", icon: BiSushi, handle: "fakeID" },
+  { label: "Mark Chen", icon: GiDumplingBao, handle: "StrictlyDumping" },
 ];
 
 const FoodyModalContent = ({ setMapMarkers }: any) => {
@@ -26,6 +26,7 @@ const FoodyModalContent = ({ setMapMarkers }: any) => {
   const handleSelectFoody = async (item: FoodiesItem) => {
     setActiveFoodie(item.label);
     const res = await fetchFoodyData(item.handle);
+    //TODO duplicate markers are being created with no score when the reviewers mention them. need to filter them out
     setMapMarkers(res.data);
   };
 
