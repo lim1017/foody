@@ -1,4 +1,5 @@
 import { OpenAI } from "openai";
+import { getData } from "../youtube/route";
 
 export const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -14,12 +15,11 @@ const chunkArray = (array, size) => {
 };
 
 export const extractName = async (data: any) => {
-  console.log(data.length, "data length");
   const chunks = chunkArray(data, 1);
   console.log(chunks.length, "chunks length");
   const results = [];
-  for (const chunk of chunks) {
-    const dataString = JSON.stringify(chunk);
+  for (let i = 0; i < chunks.length; i++) {
+    const dataString = JSON.stringify(chunks[i]);
     try {
       const completion = await openai.chat.completions.create({
         messages: [
@@ -73,10 +73,14 @@ export const extractName = async (data: any) => {
         model: "gpt-3.5-turbo",
       });
       const chunkResult = completion.choices[0].message.content;
-      console.log(chunkResult, "extracted!!!!!!!!!!1");
-      results.push(...JSON.parse(chunkResult));
+      const parsedChunkResult = JSON.parse(chunkResult);
+      console.log(parsedChunkResult, "extracted!!!!!!!!!!1");
+      parsedChunkResult[0].lastUpdated = Date.now();
+      results.push(...parsedChunkResult);
     } catch (error) {
       console.log(error);
+      //call the function again with the index to resume
+      getData(i);
       //returns partial results
       return results;
     }

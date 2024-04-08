@@ -8,8 +8,6 @@ import { getSubtitles } from "youtube-captions-scraper";
 import { Client, PlaceInputType } from "@googlemaps/google-maps-services-js";
 type VideoItem = youtube_v3.Schema$PlaylistItem;
 
-import StrictlyDumping2 from "../../../app/api/data/StrictlyDumping2.json";
-
 // Use map to extract the 'text' property from each transcript object to a single string
 function stitchTranscripts(transcripts: any[]) {
   const transcriptTexts = transcripts.map((transcript) => transcript.text);
@@ -58,18 +56,14 @@ const fetchPlaylistItems = async (
         filteredVideoList[i].snippet.transcript = stringTranscript;
       } catch (error) {
         console.error(
-          `Failed to fetch transcript for video ID ${videoId}: ${error}`
+          `Failed to fetch transcript for video ID ${videoId}, retrying with backup scrapper: ${error}`
         );
 
-        console.info(
-          "fetching transcript for video ID with backup caption scraper",
-          videoId
-        );
         const captions = await getSubtitles({
           videoID: videoId,
           lang: "en",
         });
-
+        console.log(captions[1], "captions example");
         const stringTranscript = stitchTranscripts(captions);
 
         filteredVideoList[i].snippet.transcript = stringTranscript;
@@ -123,24 +117,38 @@ export const GET = async (req, res) => {
   // const searchParams = req.nextUrl.searchParams;
   // const channelId = searchParams.get("channelId");
   // const name = searchParams.get('channelName');
+  try {
+    getData(0);
+    return NextResponse.json("Success!", { status: 200 });
+  } catch (error) {
+    console.error(error, "eeeeeeeeeeeeerrrrorrr");
+    return NextResponse.json({ error: "Error fetching vi" }, { status: 500 });
+  }
+};
 
-  const channelId = "PL0fOlXVeVW9Sk6JglFIvEYFJBu0Vkm1JV";
-  const channelName = "StrictlyDumping";
+export async function getData(index: number = 0) {
+  const channelId = "UU5PrkGgI_cIaSStOyRmLAKA";
+  const channelName = "BarStoolPizza";
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
 
   try {
     console.log("fetching data for", channelName);
     const videos = await fetchPlaylistItems(channelId, apiKey);
-    const formattedRestaurantData = formatYoutubeData(videos);
+    const vidoesArr = videos.splice(index);
+    const formattedRestaurantData = formatYoutubeData(vidoesArr);
 
     console.log("extracting data... for", channelName);
     const restaurantWithNameLocation = await extractName(
       formattedRestaurantData
     );
-
+    console.log(
+      restaurantWithNameLocation,
+      "restaurantWithNameLocation!!!!!!!!!!!!!"
+    );
     const addressPromises = restaurantWithNameLocation.map(
       async (restaurant) => {
         const details = await fetchRestaurantAddress(restaurant);
+        console.log(details, "deeeeeeeeeeetailsssss");
         return { ...restaurant, locations: details };
       }
     );
@@ -149,17 +157,14 @@ export const GET = async (req, res) => {
 
     // Write the data to a JSON file
     await fs.writeFile(
-      `./src/app/api/data/${channelName}2.json`,
+      `./src/app/api/data/${channelName}-${index}.json`,
       JSON.stringify(dataWithAddress, null, 2)
     );
     console.log("Data successfully written to file");
-
-    return NextResponse.json("Success!", { status: 200 });
   } catch (error) {
-    console.error(error, "eeeeeeeeeeeeerrrrorrr");
-    return NextResponse.json({ error: "Error fetching vi" }, { status: 500 });
+    console.error(error, "Error processing data:");
   }
-};
+}
 
 async function fetchRestaurantAddress(restaurant: {
   locations: { city: string; restaurantName: string }[];

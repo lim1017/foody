@@ -5,6 +5,7 @@ export const youtubeChannelInfo = [
   },
   {
     name: "StrictlyDumping",
-    id: "UCXOKEdfOFxsHO_-Su3K8SHg",
+    //toronto playlist
+    id: "PL0fOlXVeVW9Sk6JglFIvEYFJBu0Vkm1JV",
   },
 ];
