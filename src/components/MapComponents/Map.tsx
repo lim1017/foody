@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+  DirectionsRenderer,
+  GoogleMap,
+  LoadScript,
+  Marker,
+} from "@react-google-maps/api";
 import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
 import InformationWindow from "./InformationWindow";
+
+const lib = ["places"];
 
 interface MapProps {
   mapMarkers: any[];
@@ -19,6 +26,7 @@ const defaultCenter = {
 
 const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
   const [isMobile, setIsMobile] = useState(true);
+  const [directions, setDirections] = useState(null);
 
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
@@ -38,7 +46,18 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
       setActiveMarker(placeId);
     }
   };
+  const handleDirections = async (lat: number, lng: number) => {
+    const directionsService = new google.maps.DirectionsService();
 
+    const result = await directionsService.route({
+      origin: currentLocation,
+      destination: { lat, lng },
+      travelMode: google.maps.TravelMode.DRIVING,
+    });
+
+    setDirections(result);
+  };
+  const onMapLoad = () => {};
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
 
@@ -58,9 +77,11 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
   }, []);
   return (
     <LoadScript
+      lib={lib}
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
     >
       <GoogleMap
+        onLoad={onMapLoad}
         clickableIcons={false}
         onClick={() => setActiveMarker(null)}
         mapContainerStyle={containerStyle}
@@ -68,6 +89,7 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
         center={currentLocation}
         zoom={12}
       >
+        <Marker position={currentLocation} />
         {mapMarkers.map((video) => {
           return video.locations.map((marker) => {
             const lat = marker.geolocation.geometry.location.lat;
@@ -84,12 +106,14 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
                     marker={marker}
                     videoId={video.videoId}
                     thumbnail={video.thumbnail}
+                    handleDirections={handleDirections}
                   />
                 )}
               </Marker>
             );
           });
         })}
+        {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
     </LoadScript>
   );

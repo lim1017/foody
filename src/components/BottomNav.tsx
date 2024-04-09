@@ -33,7 +33,7 @@ const BottomNav = () => {
     <nav className="flex justify-around py-3">
       <NavItem Icon={FaListUl} label="My List" href="/list" />
       <NavItem Icon={FaMap} label="Explore" href="/" />
-      <NavItem Icon={CgProfile} label="Profile" href="/profile" />
+      <NavItem Icon={CgProfile} label="Login" href="/profile" />
     </nav>
   );
 };
