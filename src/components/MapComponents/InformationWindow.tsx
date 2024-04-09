@@ -10,7 +10,7 @@ const InformationWindow = ({
 }) => {
   const lat = marker.geolocation.geometry.location.lat;
   const lng = marker.geolocation.geometry.location.lng;
-
+  const address = marker.geolocation.formatted_address;
   return (
     <InfoWindow position={{ lat, lng }}>
       <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
@@ -30,12 +30,16 @@ const InformationWindow = ({
               Score: {marker.score}
             </span>
           </div>
-          <p className="text-gray-700 text-base">
-            {marker.geolocation.formatted_address}
-          </p>
+          <p className="text-gray-700 text-base">{address}</p>
         </div>
         <div className="px-6 pt-4 pb-2">
-          <Button onClick={() => handleDirections(lat, lng)}>Directions</Button>
+          <Button
+            onClick={() =>
+              handleDirections(marker.restaurantName, address, lat, lng)
+            }
+          >
+            Directions
+          </Button>
         </div>
       </div>
     </InfoWindow>

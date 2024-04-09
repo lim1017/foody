@@ -57,6 +57,20 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
 
     setDirections(result);
   };
+
+  const openInGoogleMaps = (name, address, lat, lng) => {
+    console.log({ name, address });
+    const mapsQuery = name
+      ? encodeURIComponent(name)
+      : address
+      ? encodeURIComponent(address)
+      : `${lat},${lng}`;
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+
+    // Open in a new tab
+    window.open(url, "_blank");
+  };
+
   const onMapLoad = () => {};
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -106,7 +120,7 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
                     marker={marker}
                     videoId={video.videoId}
                     thumbnail={video.thumbnail}
-                    handleDirections={handleDirections}
+                    handleDirections={openInGoogleMaps}
                   />
                 )}
               </Marker>
