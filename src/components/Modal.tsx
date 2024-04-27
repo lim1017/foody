@@ -32,7 +32,7 @@ const Modal = ({ isOpen, setIsOpen, children }: ModalProps) => {
         {/* Container to center the panel */}
         <div className="flex min-h-full items-center justify-center p-4">
           {/* The actual dialog panel  */}
-          <Dialog.Panel className="mx-auto max-w-sm rounded bg-white absolute top-20 inset-x-0 h-4/5 overflow-y-auto">
+          <Dialog.Panel className="mx-auto max-w-sm rounded bg-white absolute top-20 inset-x-0 h-4/5 overflow-y-auto lg:max-w-xl">
             <Dialog.Description>{children}</Dialog.Description>
           </Dialog.Panel>
         </div>

@@ -20,14 +20,14 @@ export const TopNavItem = ({
   isActive,
 }: NavItemProps) => {
   return (
-    <div className={`flex items-center flex-col space-x-2`}>
+    <div className={`flex items-center text-center flex-col space-x-2`}>
       <Icon
         onClick={onClick}
         className="mb-2"
         size={24}
         color={isActive ? "red" : "gray"}
       />
-      {label}
+      <p>{label}</p>
     </div>
   );
 };
@@ -43,11 +43,6 @@ interface topNavItem {
   icon: IconType;
   content: React.ReactNode;
 }
-
-// interface TopNavProps {
-//   activeTopNavItem: NavItemEnum;
-//   setActiveTopNavItem: React.Dispatch<React.SetStateAction<NavItemEnum>>;
-// }
 
 const TopNav = ({ setMapMarkers }: any) => {
   const [activeTopNavItem, setActiveTopNavItem] = useState<NavItemEnum>(

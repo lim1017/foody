@@ -31,17 +31,18 @@ const FoodyModalContent = ({ setMapMarkers }: any) => {
   };
 
   return (
-    <div>
-      <h1>Foodies</h1>
-      <div>
+    <div className="p-4">
+      <h1 className="text-2xl mb-4">Follow Your Favorite Foodies</h1>
+      <div className="flex flex-wrap justify-between">
         {foodiesItems.map((item) => (
-          <TopNavItem
-            onClick={() => handleSelectFoody(item)}
-            key={item.label}
-            Icon={item.icon}
-            label={item.label}
-            isActive={activeFoodie === item.label}
-          />
+          <div key={item.label} className="p-4 w-1/3 lg:flex-grow">
+            <TopNavItem
+              onClick={() => handleSelectFoody(item)}
+              Icon={item.icon}
+              label={item.label}
+              isActive={activeFoodie === item.label}
+            />
+          </div>
         ))}
       </div>
     </div>
