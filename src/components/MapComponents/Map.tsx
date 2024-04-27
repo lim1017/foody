@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  DirectionsRenderer,
-  GoogleMap,
-  LoadScript,
-  Marker,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import useCurrentLocation from "@/utils/hooks/useCurrentLocation";
 import InformationWindow from "./InformationWindow";
+import { PersonalMarker } from "./PersonalMarker";
 
 const lib = ["places"];
 
@@ -26,7 +22,6 @@ const defaultCenter = {
 
 const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
   const [isMobile, setIsMobile] = useState(true);
-  const [directions, setDirections] = useState(null);
 
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
 
@@ -46,19 +41,18 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
       setActiveMarker(placeId);
     }
   };
-  const handleDirections = async (lat: number, lng: number) => {
-    const directionsService = new google.maps.DirectionsService();
 
-    const result = await directionsService.route({
-      origin: currentLocation,
-      destination: { lat, lng },
-      travelMode: google.maps.TravelMode.DRIVING,
-    });
-
-    setDirections(result);
-  };
-
-  const openInGoogleMaps = (name, address, lat, lng) => {
+  const openInGoogleMaps = ({
+    name,
+    address,
+    lat,
+    lng,
+  }: {
+    name: string;
+    address: string;
+    lat: number;
+    lng: number;
+  }) => {
     console.log({ name, address });
     const mapsQuery = name
       ? encodeURIComponent(name)
@@ -103,7 +97,7 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
         center={currentLocation}
         zoom={12}
       >
-        <Marker position={currentLocation} />
+        <PersonalMarker currentLocation={currentLocation} />
         {mapMarkers.map((video) => {
           return video.locations.map((marker) => {
             const lat = marker.geolocation.geometry.location.lat;
@@ -127,7 +121,6 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
             );
           });
         })}
-        {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
     </LoadScript>
   );

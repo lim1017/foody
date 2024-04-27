@@ -35,7 +35,12 @@ const InformationWindow = ({
         <div className="px-6 pt-4 pb-2">
           <Button
             onClick={() =>
-              handleDirections(marker.restaurantName, address, lat, lng)
+              handleDirections({
+                name: marker.restaurantName,
+                address,
+                lat,
+                lng,
+              })
             }
           >
             Directions
