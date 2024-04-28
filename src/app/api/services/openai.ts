@@ -74,8 +74,10 @@ export const extractName = async (data: any) => {
       });
       const chunkResult = completion.choices[0].message.content;
       const parsedChunkResult = JSON.parse(chunkResult);
-      console.log(parsedChunkResult, "extracted!!!!!!!!!!1");
       parsedChunkResult[0].lastUpdated = Date.now();
+
+      console.log(`finishing chunk ${i} of ${chunks.length}`);
+
       results.push(...parsedChunkResult);
     } catch (error) {
       console.log(error);

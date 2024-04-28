@@ -4,6 +4,7 @@ import { TopNavItem } from "../TopNav";
 import { useState } from "react";
 import { IconType } from "react-icons";
 import { fetchFoodyData } from "@/utils/api/api";
+import { IoFastFoodOutline } from "react-icons/io5";
 
 type FoodiesItem = {
   label: string;
@@ -18,6 +19,16 @@ const foodiesItems = [
     handle: "BarStoolPizza",
   },
   { label: "Mark Chen", icon: GiDumplingBao, handle: "StrictlyDumping" },
+  {
+    label: "Phil's Food Review",
+    icon: IoFastFoodOutline,
+    handle: "PhilsFoodReview",
+  },
+  {
+    label: "Traveling Foodie",
+    icon: IoFastFoodOutline,
+    handle: "TravelingFoodie",
+  },
 ];
 
 const FoodyModalContent = ({ setMapMarkers }: any) => {

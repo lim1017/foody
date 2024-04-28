@@ -26,6 +26,10 @@ const fetchPlaylistItems = async (
     auth: apiKey,
   });
 
+  const currentDate = new Date();
+  const threeYearsAgo = new Date(currentDate);
+  threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
+
   let pageToken = "";
   const videos: VideoItem[] = [];
 
@@ -33,40 +37,36 @@ const fetchPlaylistItems = async (
     const response = await youtube.playlistItems.list({
       part: "snippet",
       playlistId: playlistId,
-      maxResults: 2, // Maximum allowed by the API
-      pageToken: pageToken,
+      maxResults: 10, // Maximum allowed by the API
+      pageToken: pageToken, //comment out this line if we just want to test the first 2 videos
     });
 
     const videoList: VideoItem[] = response.data.items;
 
-    const filteredVideoList = filterVideosByLocations(videoList, [
-      "Toronto",
-      "Mississauga",
-      "Richmond Hill",
-      "Vaughan",
-    ]);
+    const filteredVideoList = filterVideosByLocationsAndDate(
+      videoList,
+      ["Toronto", "Mississauga", "Richmond Hill", "Vaughan"],
+      threeYearsAgo
+    );
 
     for (let i = 0; i < filteredVideoList.length; i++) {
       const videoId = filteredVideoList[i].snippet.resourceId.videoId;
 
       try {
         if (!videoId) throw "No VideoId";
-        const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
-        const stringTranscript = stitchTranscripts(transcriptData);
-        filteredVideoList[i].snippet.transcript = stringTranscript;
-      } catch (error) {
-        console.error(
-          `Failed to fetch transcript for video ID ${videoId}, retrying with backup scrapper: ${error}`
-        );
-
         const captions = await getSubtitles({
           videoID: videoId,
           lang: "en",
         });
-        console.log(captions[1], "captions example");
         const stringTranscript = stitchTranscripts(captions);
 
         filteredVideoList[i].snippet.transcript = stringTranscript;
+      } catch (error) {
+        console.log("error fetching transcript", videoId, i);
+
+        // const transcriptData = await YoutubeTranscript.fetchTranscript(videoId);
+        // const stringTranscript = stitchTranscripts(transcriptData);
+        // filteredVideoList[i].snippet.transcript = stringTranscript;
       }
     }
 
@@ -77,9 +77,10 @@ const fetchPlaylistItems = async (
   return videos;
 };
 
-const filterVideosByLocations = (
+const filterVideosByLocationsAndDate = (
   videos: VideoItem[],
-  locations: string[]
+  locations: string[],
+  minDate: Date
 ): VideoItem[] => {
   return videos.filter((video) => {
     const snippet = video.snippet;
@@ -90,17 +91,21 @@ const filterVideosByLocations = (
     const lowerCaseTitle = title.toLowerCase();
     const lowerCaseDescription = description.toLowerCase();
 
-    return locations.some((location) => {
-      const lowerCaseLocation = location.toLowerCase();
-      return (
-        lowerCaseTitle.includes(lowerCaseLocation) ||
-        lowerCaseDescription.includes(lowerCaseLocation)
-      );
-    });
+    const publishDate = new Date(snippet.publishedAt);
+
+    return (
+      locations.some((location) => {
+        const lowerCaseLocation = location.toLowerCase();
+        return (
+          lowerCaseTitle.includes(lowerCaseLocation) ||
+          lowerCaseDescription.includes(lowerCaseLocation)
+        );
+      }) && publishDate >= minDate
+    );
   });
 };
 
-const formatYoutubeData = (data: any) => {
+const formatFilterData = (data: any) => {
   return data.map((item: any) => {
     return {
       title: item.snippet.title,
@@ -127,16 +132,18 @@ export const GET = async (req, res) => {
 };
 
 export async function getData(index: number = 0) {
-  const channelId = "UU5PrkGgI_cIaSStOyRmLAKA";
-  const channelName = "BarStoolPizza";
+  const channelId = "PL-wQeGXw6xB5WDTltGSnXX887hugYbYa1";
+  const channelName = "TravelingFoodie";
   const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY;
 
   try {
     console.log("fetching data for", channelName);
     const videos = await fetchPlaylistItems(channelId, apiKey);
-    const vidoesArr = videos.splice(index);
-    const formattedRestaurantData = formatYoutubeData(vidoesArr);
+    const videosArr = videos.splice(index);
 
+    console.log(videosArr.length, "found this many videos");
+
+    const formattedRestaurantData = formatFilterData(videosArr);
     console.log("extracting data... for", channelName);
     const restaurantWithNameLocation = await extractName(
       formattedRestaurantData

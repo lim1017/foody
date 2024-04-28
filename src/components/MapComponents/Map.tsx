@@ -100,6 +100,7 @@ const Map: React.FC<MapProps> = ({ mapMarkers }: MapProps) => {
         <PersonalMarker currentLocation={currentLocation} />
         {mapMarkers.map((video) => {
           return video.locations.map((marker) => {
+            console.log(marker, "marker");
             const lat = marker.geolocation.geometry.location.lat;
             const lng = marker.geolocation.geometry.location.lng;
             return (
